@@ -29,4 +29,9 @@ class PropertyGraphTest extends FunSuite {
     val graph = propertyGraph.getTripletView(Graph(users, relationships, defaultUser))
     assert(graph.count() === 4)
   }
+
+  test("property graph returns indegree of a graph") {
+    val graph = propertyGraph.getInDegree(Graph(users, relationships, defaultUser))
+    assert(graph.count() === 3)
+  }
 }
