@@ -1,5 +1,7 @@
 package com.knoldus.spark.graphx
 
-class PropertyGraph {
+import org.apache.spark.SparkContext
+
+class PropertyGraph(sparkContext: SparkContext) {
 
 }
