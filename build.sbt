@@ -9,3 +9,7 @@ scalaVersion := "2.11.8"
 organization := "com.knoldus"
 
 scalastyleConfig in Compile :=  file("Knoldus-spark-scalastyle-config-v0.1.xml")
+
+libraryDependencies ++= Seq(
+  "org.apache.spark" %% "spark-graphx" % "2.0.0"
+)
