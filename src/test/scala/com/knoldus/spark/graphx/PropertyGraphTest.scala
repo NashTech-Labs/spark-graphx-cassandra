@@ -34,4 +34,17 @@ class PropertyGraphTest extends FunSuite {
     val graph = propertyGraph.getInDegree(Graph(users, relationships, defaultUser))
     assert(graph.count() === 3)
   }
+
+  test("property graph returns subgraph of a graph") {
+    val users: RDD[(VertexId, (String, String))] =
+      sparkContext.parallelize(Array((3L, ("rxin", "student")), (7L, ("jgonzal", "postdoc")), (5L, ("franklin", "prof")), (2L, ("istoica", "prof")),
+        (4L, ("peter", "student"))))
+    val relationships: RDD[Edge[String]] =
+      sparkContext.parallelize(Array(Edge(3L, 7L, "collab"), Edge(5L, 3L, "advisor"), Edge(2L, 5L, "colleague"), Edge(5L, 7L, "pi"), Edge(4L, 0L, "student"),
+        Edge(5L, 0L, "colleague")))
+    val defaultUser = ("John Doe", "Missing")
+
+    val subGraph = propertyGraph.getSubGraph(Graph(users, relationships, defaultUser), { (id: Long, attr: (String, String)) => attr._2 != "Missing" })
+    assert(subGraph.edges.count() === 4)
+  }
 }

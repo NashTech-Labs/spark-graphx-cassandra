@@ -1,7 +1,7 @@
 package com.knoldus.spark.graphx
 
 import org.apache.spark.SparkContext
-import org.apache.spark.graphx.{ Edge, Graph, VertexId, VertexRDD }
+import org.apache.spark.graphx._
 import org.apache.spark.rdd.RDD
 
 class PropertyGraph(sparkContext: SparkContext) {
@@ -12,4 +12,7 @@ class PropertyGraph(sparkContext: SparkContext) {
     graph.triplets.map(triplet => s"${triplet.srcAttr} is the ${triplet.attr} of ${triplet.dstAttr}")
 
   def getInDegree(graph: Graph[(String, String), String]): VertexRDD[Int] = graph.inDegrees
+
+  def getSubGraph(graph: Graph[(String, String), String], vertexPredicate: (VertexId, (String, String)) => Boolean): Graph[(String, String), String] =
+    graph.subgraph(vpred = vertexPredicate)
 }
