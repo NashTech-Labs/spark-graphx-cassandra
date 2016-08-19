@@ -11,5 +11,6 @@ organization := "com.knoldus"
 scalastyleConfig in Compile :=  file("Knoldus-spark-scalastyle-config-v0.1.xml")
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-graphx" % "2.0.0"
+  "org.apache.spark" %% "spark-graphx" % "2.0.0",
+  "com.datastax.spark" %% "spark-cassandra-connector" % "2.0.0-M1"
 )
